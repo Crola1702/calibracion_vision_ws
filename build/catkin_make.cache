@@ -1,0 +1,2 @@
+calibracion_vision_pkg
+-DCATKIN_DEVEL_PREFIX=/home/crola/code/ar_detection/calibracion_vision_ws/devel -DCMAKE_INSTALL_PREFIX=/home/crola/code/ar_detection/calibracion_vision_ws/install -G Unix Makefiles

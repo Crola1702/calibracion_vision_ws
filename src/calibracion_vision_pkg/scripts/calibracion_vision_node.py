@@ -3,12 +3,21 @@
 import rospy
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32
+from std_msgs.msg import bool
 from cv_bridge import CvBridge
 
 import cv2
 
 def image_recived(msg):
+    # if MOVEMENT_RECIVED:
     showImage(CvBridge().imgmsg_to_cv2(msg))
+        # switch_movement_recived()
+
+# def movement_recived(msg):
+#     MOVEMENT_RECIVED = msg
+
+# def switch_movement_recived():
+#     MOVEMENT_RECIVED = False
 
 def calculate_movement(frame):
     frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
@@ -74,7 +83,8 @@ def main():
     global pub
     pub = rospy.Publisher('movimiento_ajuste', Float32, queue_size=2)
 
-    sub = rospy.Subscriber(IMAGE_TOPIC, Image, image_recived, queue_size=2)
+    sub1 = rospy.Subscriber(IMAGE_TOPIC, Image, image_recived, queue_size=2)
+    # sub2 = rospy.Subscriber(MOVEMENT_TOPIC, bool, movement_recived, queue_size=10)
 
     rospy.spin()
 
@@ -93,6 +103,9 @@ if __name__ == '__main__':
     ADELANTE = 5
     
     IMAGE_TOPIC = '/camera_image/color/image_raw'
+    # MOVEMENT_TOPIC = '/movement_detected'
+    
+    # MOVEMENT_RECIVED = True
 
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_ARUCO_ORIGINAL)
     arucoParams = cv2.aruco.DetectorParameters_create()

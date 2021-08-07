@@ -74,7 +74,7 @@ def main():
     global pub
     pub = rospy.Publisher('movimiento_ajuste', Float32, queue_size=2)
 
-    sub = rospy.Subscriber('/camera_image/color/image_raw', Image, image_recived, queue_size=2)
+    sub = rospy.Subscriber(IMAGE_TOPIC, Image, image_recived, queue_size=2)
 
     rospy.spin()
 
@@ -91,6 +91,8 @@ if __name__ == '__main__':
     ARRIBA = 3
     ABAJO = 4
     ADELANTE = 5
+    
+    IMAGE_TOPIC = '/camera_image/color/image_raw'
 
     arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_ARUCO_ORIGINAL)
     arucoParams = cv2.aruco.DetectorParameters_create()
